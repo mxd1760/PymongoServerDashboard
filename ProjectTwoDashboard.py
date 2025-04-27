@@ -1,5 +1,5 @@
-# Setup the Jupyter version of Dash
-from jupyter_dash import JupyterDash
+# Setup the normal version of Dash
+from dash import Dash
 
 # Configure the necessary Python module imports
 import dash_leaflet as dl
@@ -29,9 +29,7 @@ from AAC_ReadWrite import AnimalShelter
 # likely need more variables for your constructor to handle the hostname and port of the MongoDB
 # server, and the database and collection names
 
-username = "aacuser"
-password = "aacpass"
-shelter = AnimalShelter(username, password)
+shelter = AnimalShelter()
 
 MAX_UNIQUE_PIE_SLICES = 6
 
@@ -56,7 +54,7 @@ df.drop(columns=['_id'],inplace=True)
 #########################
 # Dashboard Layout / View
 #########################
-app = JupyterDash('SimpleExample')
+app = Dash('SimpleExample')
 
 app.layout = html.Div([
     html.Div(id='hidden-div', style={'display':'none'}),
@@ -179,4 +177,4 @@ def on_switch(value):
         fig.update_layout(width=800,height=500)
     return data,columns, fig
             
-app.run_server(debug=True)
+app.run(debug=True)

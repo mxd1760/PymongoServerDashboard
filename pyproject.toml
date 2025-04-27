@@ -1,0 +1,11 @@
+[project]
+name="pymongo-database-dashboard"
+version="1"
+dependencies=[
+  "jupyter-dash",
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "dash-leaflet",
+  "pymongo"
+]

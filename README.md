@@ -20,19 +20,42 @@ I think it was challenging implementing many things that I knew how to do with t
 ## Build Instructions
 If you would like to test this software for yourself you will need to follow these steps to get it up and running
 
+
+- Setup a virtual environment with uv
+```
+winget install --id=astral-sh.uv  -e
+```
 -	Install mongodb 
+```
+winget install -e --id MongoDB.Server
+winget install -e --id MongoDB.Shell
+winget install -e --id MongoDB.DatabaseTools
+```
+-	clone the repo and cd into it from a terminal
 -	Use the aac_shelter_ooutcomes.csv file to populate a sample database
+```
+"%ProgramFiles%\MongoDB\Tools\100\bin\mongoimport" --db AAC --collection animals --type csv --file aac_shelter_outcomes.csv --headerline --drop
+```
 -	Create a user with access to this database to use in the python scripts
--	Download the AAC_ReadWrite.py and ProjectTwoDashboard.py files into a local folder
--	Before these files will work you will need to go into one or both of them to edit the username, password, and path to the database. If you didn’t name your database ‘AAC’ and the collection ‘animals’ you will need to change those too
--	In a terminal from the folder where your files are run the following 3 commands in order
+
+start mongo shell
 ```
-pip install pipreqs
-pipreqs .
-pip install -r requirements.txt
+mongosh
 ```
-These commands together should install all the necessary python dependencies for the files.
--	Once all dependencies are installed and both files have been configured to access the database you setup you should be ready to run `python ProjectTwoDashboard.py” to start a server that can be accessed from a browser with the link that should be provided.
+run the following mongodb commands
+```
+use admin
+db.createUser({user:"user",pwd:"password",roles:[{role:"readWrite",db:"AAC"}]})
+```
+-	Before these files will work you will need to go into the AAC_ReadWrite file to edit the username and password. If you didn’t name your database ‘AAC’, the collection ‘animals’, or you're hosting on a different port or hostname you will need to change those too.
+
+AAC_ReadWrite line 7 -> change user and password
+AAC_ReadWrite lines 20-23 -> change variables based on MongoDB configuration
+
+-	run the project with the virtual environment dependencies
+```
+uv run python ProjectTwoDashboard.py
+```
      
 ## Course Questions
 

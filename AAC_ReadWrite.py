@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 class AnimalShelter(object):
     """ CRUD operations for Animal collection in MongoDB """
 
-    def __init__(self,user = 'aacuser',pwd = 'aacpass'):
+    def __init__(self, user = 'user',pwd = 'password'):
         # Initializing the MongoClient. This helps to 
         # access the MongoDB databases and collections.
         # This is hard-wired to use the aac database, the 
@@ -17,8 +17,8 @@ class AnimalShelter(object):
         #
         # Connection Variables
         #
-        HOST = 'nv-desktop-services.apporto.com'
-        PORT = 31700
+        HOST = 'localhost'
+        PORT = 27017
         DB = 'AAC'
         COL = 'animals'
         #
