@@ -9,41 +9,47 @@ This project intends to provide access to a mongodb database through the use of 
 ## Build Instructions
 If you would like to test this software for yourself you will need to follow these steps to get it up and running
 
-- Setup a virtual environment with uv
-```
-winget install --id=astral-sh.uv  -e
-```
--	Install mongodb 
-```
-winget install -e --id MongoDB.Server
-winget install -e --id MongoDB.Shell
-winget install -e --id MongoDB.DatabaseTools
-```
--	clone the repo and cd into it from a terminal
--	Use the aac_shelter_ooutcomes.csv file to populate a sample database
-```
-"%ProgramFiles%\MongoDB\Tools\100\bin\mongoimport" --db AAC --collection animals --type csv --file aac_shelter_outcomes.csv --headerline --drop
-```
--	Create a user with access to this database to use in the python scripts
-
-start mongo shell
-```
-mongosh
-```
-run the following mongodb commands
-```
-use admin
-db.createUser({user:"user",pwd:"password",roles:[{role:"readWrite",db:"AAC"}]})
-```
--	Before these files will work you will need to go into the AAC_ReadWrite file to edit the username and password. If you didn’t name your database ‘AAC’, the collection ‘animals’, or you're hosting on a different port or hostname you will need to change those too.
-
-AAC_ReadWrite line 7 -> change user and password
-AAC_ReadWrite lines 20-23 -> change variables based on MongoDB configuration
-
--	run the project with the virtual environment dependencies
-```
-uv run python ProjectTwoDashboard.py
-```
+  - Setup a virtual environment with uv
+    ```
+    winget install --id=astral-sh.uv  -e
+    ```
+  - Install mongodb 
+    ```
+    winget install -e --id MongoDB.Server
+    winget install -e --id MongoDB.Shell
+    winget install -e --id MongoDB.DatabaseTools
+    ```
+  - clone the repo and cd into it from a terminal
+  - start a mongodb instance
+    ```
+    mkdir ./mongodb
+    "%ProgramFiles%\MongoDB\Server\8.0\bin\mongod" ./mongodb
+    ```
+  - Use the aac_shelter_ooutcomes.csv file to populate a sample database
+    ```
+    "%ProgramFiles%\MongoDB\Tools\100\bin\mongoimport" --db AAC --collection animals --type csv --file aac_shelter_outcomes.csv   --headerline --drop
+    ```
+  - Create a user with access to this database to use in the python scripts
+    - start mongo shell
+      ```
+      mongosh
+      ```
+    - run the following mongodb commands
+      ```
+      use admin
+      db.createUser({user:"user",pwd:"password",roles:[{role:"readWrite",db:"AAC"}]})
+      ```
+    - leave mongosh with 
+      ```
+      quit
+      ```
+  - Before these files will work you will need to go into the AAC_ReadWrite file to edit the username and password. If you didn’t name your database ‘AAC’, the collection ‘animals’, or you're hosting on a different port or hostname you will need to change those too.
+    - AAC_ReadWrite line 7 -> change user and password
+    - AAC_ReadWrite lines 20-23 -> change variables based on MongoDB configuration
+  - run the project with the virtual environment dependencies
+    ```
+    uv run python ProjectTwoDashboard.py
+    ```
 
 ## Tools Used
 [MongoDB]( https://www.mongodb.com/ ) was selected as the database for this project because it formats data in a json like way which makes it easy to convert between the database and python dictionaries.

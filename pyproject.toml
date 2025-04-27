@@ -7,5 +7,6 @@ dependencies=[
   "pandas",
   "matplotlib",
   "dash-leaflet",
-  "pymongo"
+  "pymongo",
+  "plotly[express]"
 ]
