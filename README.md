@@ -4,6 +4,8 @@
 ## Functionality
 This project intends to provide access to a mongodb database through the use of the pymongo python package and an interactive application developed with the dash framework. This kind of software allows for non-technical staff to access the data as well as view several useful visualizations of it.
 
+![](images/Sort%20By%20Mountain%20Rescue.png)
+
 ## Build Instructions
 If you would like to test this software for yourself you will need to follow these steps to get it up and running
 
